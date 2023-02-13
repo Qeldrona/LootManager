@@ -1,0 +1,13 @@
+C:\Code\LootManager\bin\Debug\UI\LootManagerInfoView.xml
+C:\Code\LootManager\bin\Debug\UI\LootManagerIgnoreListView.xml
+C:\Code\LootManager\bin\Debug\UI\ItemEntry.xml
+C:\Code\LootManager\bin\Debug\UI\LootManagerSettingWindow - Copy.xml
+C:\Code\LootManager\bin\Debug\UI\LootManagerSettingWindow.xml
+C:\Code\LootManager\bin\Debug\UI\LootManagerLootListView.xml
+C:\Code\LootManager\bin\Debug\LootManager.dll
+C:\Code\LootManager\bin\Debug\LootManager.pdb
+C:\Code\LootManager\LootManager\obj\Debug\LootManager.csproj.AssemblyReference.cache
+C:\Code\LootManager\LootManager\obj\Debug\LootManager.csproj.CoreCompileInputs.cache
+C:\Code\LootManager\LootManager\obj\Debug\LootManager.csproj.CopyComplete
+C:\Code\LootManager\LootManager\obj\Debug\LootManager.dll
+C:\Code\LootManager\LootManager\obj\Debug\LootManager.pdb

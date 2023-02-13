@@ -1,0 +1,22 @@
+C:\Code\AOSharp-Handlers\bin\Release\UI\LootManagerInfoView.xml
+C:\Code\AOSharp-Handlers\bin\Release\UI\LootManagerIgnoreListView.xml
+C:\Code\AOSharp-Handlers\bin\Release\UI\ItemEntry.xml
+C:\Code\AOSharp-Handlers\bin\Release\UI\LootManagerSettingWindow - Copy.xml
+C:\Code\AOSharp-Handlers\bin\Release\UI\LootManagerSettingWindow.xml
+C:\Code\AOSharp-Handlers\bin\Release\UI\LootManagerLootListView.xml
+C:\Code\AOSharp-Handlers\bin\Release\LootManager.dll
+C:\Code\AOSharp-Handlers\LootManager\obj\Release\LootManager.csproj.AssemblyReference.cache
+C:\Code\AOSharp-Handlers\LootManager\obj\Release\LootManager.csproj.CoreCompileInputs.cache
+C:\Code\AOSharp-Handlers\LootManager\obj\Release\LootManager.csproj.CopyComplete
+C:\Code\AOSharp-Handlers\LootManager\obj\Release\LootManager.dll
+C:\Code\LootManager\bin\Release\UI\LootManagerInfoView.xml
+C:\Code\LootManager\bin\Release\UI\LootManagerIgnoreListView.xml
+C:\Code\LootManager\bin\Release\UI\ItemEntry.xml
+C:\Code\LootManager\bin\Release\UI\LootManagerSettingWindow - Copy.xml
+C:\Code\LootManager\bin\Release\UI\LootManagerSettingWindow.xml
+C:\Code\LootManager\bin\Release\UI\LootManagerLootListView.xml
+C:\Code\LootManager\bin\Release\LootManager.dll
+C:\Code\LootManager\LootManager\obj\Release\LootManager.csproj.AssemblyReference.cache
+C:\Code\LootManager\LootManager\obj\Release\LootManager.csproj.CoreCompileInputs.cache
+C:\Code\LootManager\LootManager\obj\Release\LootManager.csproj.CopyComplete
+C:\Code\LootManager\LootManager\obj\Release\LootManager.dll

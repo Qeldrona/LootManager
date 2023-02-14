@@ -154,7 +154,7 @@ namespace LootManager
                         item.MoveToInventory();
                         if (EnableProcessIncomingMonsterParts)
                         {
-                            ProcessIncomingMonsterParts(item); 
+                            await ProcessIncomingMonsterParts(item); 
                         }
                     }
                     else if (Delete)
@@ -603,38 +603,36 @@ namespace LootManager
             File.WriteAllText(filename, rulesJson);
         }
 
-        private async void ProcessIncomingMonsterParts(Item item)
-        {
+        private async Task ProcessIncomingMonsterParts(Item item)        {
             if (item.Name.ToLower() == "monster parts")
             {
                 try
                 {
-                    await Task.Delay(1000); // waiting for looting to complete
+                    await Task.Delay(700); // waiting for looting to complete
 
                     //find bio communicator
-                    var inventoryItemList = new List<Item>();
                     var bioComminutor = Inventory.Items.Where(c => c.Name == "Basic Bio-Comminutor" || c.Name == "Advanced Bio-Comminutor").FirstOrDefault();
-
                     var monsterParts = Inventory.Items.Where(c => c.Name.ToLower() == "monster parts");
 
                     foreach (var monsterPart in monsterParts)
                     {
-                        await Task.Delay(500).ContinueWith(x =>
+                        await Task.Delay(200).ContinueWith(x =>
                         {
                             bioComminutor.CombineWith(monsterPart);
                         });
                     }
 
-                    await Task.Delay(500).ContinueWith(async x =>
+                    await Task.Delay(200).ContinueWith(async x =>
                     {
                         await MoveBloodPlasmaToContainers();
                     });
-                    
+
                 }
                 catch (Exception ex)
                 {
                     Chat.WriteLine(ex);
                 }
+                return;
             }
         }
 

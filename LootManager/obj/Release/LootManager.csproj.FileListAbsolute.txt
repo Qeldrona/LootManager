@@ -20,3 +20,14 @@ C:\Code\LootManager\LootManager\obj\Release\LootManager.csproj.AssemblyReference
 C:\Code\LootManager\LootManager\obj\Release\LootManager.csproj.CoreCompileInputs.cache
 C:\Code\LootManager\LootManager\obj\Release\LootManager.csproj.CopyComplete
 C:\Code\LootManager\LootManager\obj\Release\LootManager.dll
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\bin\Release\UI\LootManagerInfoView.xml
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\bin\Release\UI\LootManagerIgnoreListView.xml
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\bin\Release\UI\ItemEntry.xml
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\bin\Release\UI\LootManagerSettingWindow - Copy.xml
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\bin\Release\UI\LootManagerSettingWindow.xml
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\bin\Release\UI\LootManagerLootListView.xml
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\bin\Release\LootManager.dll
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\LootManager\obj\Release\LootManager.csproj.AssemblyReference.cache
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\LootManager\obj\Release\LootManager.csproj.CoreCompileInputs.cache
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\LootManager\obj\Release\LootManager.csproj.CopyComplete
+C:\Users\krist\OneDrive\Utvikling\NewAO\ForkedLootmanager\LootManager\obj\Release\LootManager.dll

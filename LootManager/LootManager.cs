@@ -273,14 +273,14 @@ namespace LootManager
                 {
                     chkProcessMonsterParts.SetValue(EnableProcessIncomingMonsterParts);
                     if (chkProcessMonsterParts.Toggled == null)
-                        chkProcessMonsterParts.Toggled += chkProcess_Toggled;
+                        chkProcessMonsterParts.Toggled += chkProcessMonsterParts_Toggled;
                 }
 
                 if (SettingsController.settingsWindow.FindView("chkProcessPearls", out Checkbox chkProcessPearls))
                 {
                     chkProcessPearls.SetValue(EnableProcessIncomingPearls);
                     if (chkProcessPearls.Toggled == null)
-                        chkProcessPearls.Toggled += chkProcess_Toggled;
+                        chkProcessPearls.Toggled += chkProcessPearls_Toggled;
                 }
 
                 //if (SettingsController.settingsWindow.FindView("chkBags", out Checkbox chkBags))
@@ -358,10 +358,16 @@ namespace LootManager
             Checkbox chk = (Checkbox)sender;
             Looting = e;
         }
-        private void chkProcess_Toggled(object sender, bool e)
+        private void chkProcessMonsterParts_Toggled(object sender, bool e)
         {
             Checkbox chk = (Checkbox)sender;
             EnableProcessIncomingMonsterParts = e;
+        }
+
+        private void chkProcessPearls_Toggled(object sender, bool e)
+        {
+            Checkbox chk = (Checkbox)sender;
+            EnableProcessIncomingPearls = e;
         }
 
         private void remButtonClicked(object sender, ButtonBase e)

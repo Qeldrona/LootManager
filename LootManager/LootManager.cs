@@ -51,6 +51,7 @@ namespace LootManager
         private static bool Bags = false;
         private static bool Delete = false;
         private static bool EnableProcessIncomingMonsterParts = false;
+        private static bool EnableProcessIncomingPearls = false;
 
         private static double _nowTimer = Time.NormalTime;
 
@@ -154,7 +155,11 @@ namespace LootManager
                         item.MoveToInventory();
                         if (EnableProcessIncomingMonsterParts)
                         {
-                            await ProcessIncomingMonsterParts(item); 
+                            await ProcessIncomingMonsterParts(item);
+                        }
+                        if (EnableProcessIncomingPearls)
+                        {
+                            await ProcessIncomingPearls(item);
                         }
                     }
                     else if (Delete)
@@ -264,11 +269,18 @@ namespace LootManager
                         chkDel.Toggled += chkDel_Toggled;
                 }
 
-                if (SettingsController.settingsWindow.FindView("chkProcess", out Checkbox chkProcess))
+                if (SettingsController.settingsWindow.FindView("chkProcessMonsterParts", out Checkbox chkProcessMonsterParts))
                 {
-                    chkProcess.SetValue(EnableProcessIncomingMonsterParts);
-                    if (chkProcess.Toggled == null)
-                        chkProcess.Toggled += chkProcess_Toggled;
+                    chkProcessMonsterParts.SetValue(EnableProcessIncomingMonsterParts);
+                    if (chkProcessMonsterParts.Toggled == null)
+                        chkProcessMonsterParts.Toggled += chkProcessMonsterParts_Toggled;
+                }
+
+                if (SettingsController.settingsWindow.FindView("chkProcessPearls", out Checkbox chkProcessPearls))
+                {
+                    chkProcessPearls.SetValue(EnableProcessIncomingPearls);
+                    if (chkProcessPearls.Toggled == null)
+                        chkProcessPearls.Toggled += chkProcessPearls_Toggled;
                 }
 
                 //if (SettingsController.settingsWindow.FindView("chkBags", out Checkbox chkBags))
@@ -310,6 +322,22 @@ namespace LootManager
                     if (processMonsterPartsbut.Clicked == null)
                         processMonsterPartsbut.Clicked += manuallyProcessMonsterPartsButtonClicked;
                 }
+                //Pearls
+                if (SettingsController.settingsWindow.FindView("buttonMoveCutPearlsToInventory", out Button moveCutPearlsToInvbut))
+                {
+                    if (moveCutPearlsToInvbut.Clicked == null)
+                        moveCutPearlsToInvbut.Clicked += moveCutPearlsToInventoryButtonClicked;
+                }
+                if (SettingsController.settingsWindow.FindView("buttonMovePearlsToInventory", out Button movePearlsbut))
+                {
+                    if (movePearlsbut.Clicked == null)
+                        movePearlsbut.Clicked += movePearlsToInventoryButtonClicked;
+                }
+                if (SettingsController.settingsWindow.FindView("buttonManuallyProcessPearls", out Button processPearlsbut))
+                {
+                    if (processPearlsbut.Clicked == null)
+                        processPearlsbut.Clicked += manuallyProcessPearlsButtonClicked;
+                }
             }
         }
 
@@ -330,10 +358,16 @@ namespace LootManager
             Checkbox chk = (Checkbox)sender;
             Looting = e;
         }
-        private void chkProcess_Toggled(object sender, bool e)
+        private void chkProcessMonsterParts_Toggled(object sender, bool e)
         {
             Checkbox chk = (Checkbox)sender;
             EnableProcessIncomingMonsterParts = e;
+        }
+
+        private void chkProcessPearls_Toggled(object sender, bool e)
+        {
+            Checkbox chk = (Checkbox)sender;
+            EnableProcessIncomingPearls = e;
         }
 
         private void remButtonClicked(object sender, ButtonBase e)
@@ -436,6 +470,41 @@ namespace LootManager
 
             return;
         }
+
+        //Pearls
+        private void moveCutPearlsToInventoryButtonClicked(object sender, ButtonBase e)
+        {
+            foreach (Backpack backpack in Inventory.Backpacks)
+            {
+                foreach (Item item in backpack.Items)
+                {
+                    if (Inventory.NumFreeSlots == 0)
+                    {
+                        Chat.WriteLine("inventory full", ChatColor.Red);
+                        return;
+                    }
+                    if (item.Name.Contains("Perfectly Cut"))
+                    {
+                        item.MoveToInventory();
+                    }
+                }
+            }
+
+            return;
+        }
+        private void movePearlsToInventoryButtonClicked(object sender, ButtonBase e)
+        {
+            MovePearlsFromContainersToInventory();
+
+            return;
+        }
+        private void manuallyProcessPearlsButtonClicked(object sender, ButtonBase e)
+        {
+            ManuallyProcessPearls();
+
+            return;
+        }
+
 
         private void setButtonClicked(object sender, ButtonBase e)
         {
@@ -603,7 +672,8 @@ namespace LootManager
             File.WriteAllText(filename, rulesJson);
         }
 
-        private async Task ProcessIncomingMonsterParts(Item item)        {
+        private async Task ProcessIncomingMonsterParts(Item item)
+        {
             if (item.Name.ToLower() == "monster parts")
             {
                 try
@@ -681,6 +751,89 @@ namespace LootManager
                 bloodplasma.MoveToContainer(availableLootBag);
             }
         }
+
+        //Pearls
+
+        private async Task ProcessIncomingPearls(Item item)
+        {
+            if (item.Name.ToLower().Contains("Pearl"))
+            {
+                try
+                {
+                    await Task.Delay(700); // waiting for looting to complete
+
+                    //find gem cutter
+                    var gemCutter = Inventory.Items.Where(c => c.Name == "Jensen Gem Cutter").FirstOrDefault();
+                    var Pearls = Inventory.Items.Where(c => c.Name.ToLower().Contains("Pearl"));
+
+                    foreach (var pearl in Pearls)
+                    {
+                        await Task.Delay(200).ContinueWith(x =>
+                        {
+                            gemCutter.CombineWith(pearl);
+                        });
+                    }
+
+                    await Task.Delay(200).ContinueWith(async x =>
+                    {
+                        await MoveCutPearlsToContainers();
+                    });
+
+                }
+                catch (Exception ex)
+                {
+                    Chat.WriteLine(ex);
+                }
+                return;
+            }
+        }
+
+        private void MovePearlsFromContainersToInventory()
+        {
+            var Pearls = new List<Item>();
+
+            foreach (var backpack in Inventory.Backpacks)
+            {
+                Pearls.AddRange(backpack.Items.Where(x => x.Name.Contains("Pearl") && !x.Name.Contains("Perfectly Cut")));
+            }
+
+            foreach (var monsterpart in Pearls)
+            {
+                if (Inventory.NumFreeSlots <= 1) { return; }
+                monsterpart.MoveToInventory();
+            }
+        }
+
+        private async void ManuallyProcessPearls()
+        {
+            var gemCutter = Inventory.Items.Where(c => c.Name == "Jensen Gem Cutter").FirstOrDefault();
+            var Pearls = Inventory.Items.Where(x => x.Name.Contains("Pearl") && !x.Name.Contains("Perfectly Cut"));
+
+            if (gemCutter == null || Pearls.Count() <= 0) { return; }
+
+            foreach (var pearl in Pearls)
+            {
+                gemCutter.CombineWith(pearl);
+            }
+            await MoveCutPearlsToContainers();
+        }
+
+        private async Task MoveCutPearlsToContainers()
+        {
+            var CutPearlsList = Inventory.Items.Where(c => c.Name.Contains("Perfectly Cut"));
+            foreach (var CutPearls in CutPearlsList)
+            {
+                var availableLootBag = await FindOpenBagWithSpace();
+                if (availableLootBag == null)
+                {
+                    Chat.WriteLine("no available bag found, exiting");
+                    return;
+                }
+
+                CutPearls.MoveToContainer(availableLootBag);
+            }
+        }
+        //!Pearls
 
         public bool CheckRules(Item item)
         {

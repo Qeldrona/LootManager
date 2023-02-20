@@ -762,15 +762,15 @@ namespace LootManager
                 {
                     await Task.Delay(700); // waiting for looting to complete
 
-                    //find bio communicator
+                    //find gem cutter
                     var gemCutter = Inventory.Items.Where(c => c.Name == "Jensen Gem Cutter").FirstOrDefault();
                     var Pearls = Inventory.Items.Where(c => c.Name.ToLower().Contains("Pearl"));
 
-                    foreach (var monsterPart in Pearls)
+                    foreach (var pearl in Pearls)
                     {
                         await Task.Delay(200).ContinueWith(x =>
                         {
-                            gemCutter.CombineWith(monsterPart);
+                            gemCutter.CombineWith(pearl);
                         });
                     }
 
@@ -811,9 +811,9 @@ namespace LootManager
 
             if (gemCutter == null || Pearls.Count() <= 0) { return; }
 
-            foreach (var monsterPart in Pearls)
+            foreach (var pearl in Pearls)
             {
-                gemCutter.CombineWith(monsterPart);
+                gemCutter.CombineWith(pearl);
             }
             await MoveCutPearlsToContainers();
         }

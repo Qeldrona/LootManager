@@ -305,10 +305,20 @@ namespace LootManager
                     if (moveMonsterPartsbut.Clicked == null)
                         moveMonsterPartsbut.Clicked += moveMonsterPartsToInventoryButtonClicked;
                 }
+                if (SettingsController.settingsWindow.FindView("buttonMoveItemToInventory", out Button moveItemToInvbut))
+                {
+                    if (moveItemToInvbut.Clicked == null)
+                        moveItemToInvbut.Clicked += moveItemToInventoryButtonClicked;
+                }
                 if (SettingsController.settingsWindow.FindView("buttonManuallyProcessMonsterParts", out Button processMonsterPartsbut))
                 {
                     if (processMonsterPartsbut.Clicked == null)
                         processMonsterPartsbut.Clicked += manuallyProcessMonsterPartsButtonClicked;
+                }
+                if (SettingsController.settingsWindow.FindView("buttonMoveItemToBag", out Button moveItemToBagbut))
+                {
+                    if (moveItemToBagbut.Clicked == null)
+                        moveItemToBagbut.Clicked += moveItemButtonClicked;
                 }
             }
         }
@@ -430,9 +440,22 @@ namespace LootManager
 
             return;
         }
+        private void moveItemToInventoryButtonClicked(object sender, ButtonBase e)
+        {
+            MoveItemFromContainersToInventory();
+
+            return;
+        }
         private void manuallyProcessMonsterPartsButtonClicked(object sender, ButtonBase e)
         {
             ManuallyProcessMonsterParts();
+
+            return;
+        }
+
+        private async void moveItemButtonClicked(object sender, ButtonBase e)
+        {
+            await MoveItemToContainers();
 
             return;
         }
@@ -652,6 +675,22 @@ namespace LootManager
             }
         }
 
+        private void MoveItemFromContainersToInventory()
+        {
+            var items = new List<Item>();
+
+            foreach (var bag in Inventory.Backpacks)
+            {
+                items.AddRange(bag.Items.Where(x => x.Name.ToLower() == "yuttos modified ncu"));
+            }
+
+            foreach (var item in items)
+            {
+                if (Inventory.NumFreeSlots <= 1) { return; }
+                item.MoveToInventory();
+            }
+        }
+
         private async void ManuallyProcessMonsterParts()
         {
             var bioComminutor = Inventory.Items.Where(c => c.Name == "Basic Bio-Comminutor" || c.Name == "Advanced Bio-Comminutor").FirstOrDefault();
@@ -664,6 +703,21 @@ namespace LootManager
                 bioComminutor.CombineWith(monsterPart);
             }
             await MoveBloodPlasmaToContainers();
+        }
+        private async Task MoveItemToContainers()
+        {
+            var ncuList = Inventory.Items.Where(c => c.Name.ToLower() == "yuttos modified ncu");
+            foreach (var ncu in ncuList)
+            {
+                var availableLootBag = await FindOpenBagWithSpace();
+                if (availableLootBag == null)
+                {
+                    Chat.WriteLine("no available bag found, exiting");
+                    return;
+                }
+
+                ncu.MoveToContainer(availableLootBag);
+            }
         }
 
         private async Task MoveBloodPlasmaToContainers()

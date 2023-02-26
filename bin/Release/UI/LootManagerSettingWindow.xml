@@ -19,8 +19,10 @@
         <TextView name="tvprocess" value="Process incoming monster parts" layout_borders="Rect(5,5,5,5)" />
         <CheckBox name="chkProcess" label="" layout_borders="Rect(5,5,5,5)" />
         <Button name="buttonMovePlasmaToInventory" label="Move Plasma To Inventory" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
-		<Button name="buttonMoveMonsterPartsToInventory" label="Move Monster Parts To Inventory" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
-		<Button name="buttonManuallyProcessMonsterParts" label="Manually Process Monster Parts" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
+		    <Button name="buttonMoveMonsterPartsToInventory" label="Move Monster Parts To Inventory" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
+		    <Button name="buttonManuallyProcessMonsterParts" label="Manually Process Monster Parts" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
+        <Button name="buttonMoveItemToBag" label="Move Item to Bag" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
+        <Button name="buttonMoveItemToInventory" label="Move Item To Inv" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
       </View>
     </BorderView>
 

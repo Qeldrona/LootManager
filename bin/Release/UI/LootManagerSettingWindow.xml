@@ -23,6 +23,7 @@
 		    <Button name="buttonManuallyProcessMonsterParts" label="Manually Process Monster Parts" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
         <Button name="buttonMoveItemToBag" label="Move Item to Bag" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
         <Button name="buttonMoveItemToInventory" label="Move Item To Inv" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
+		<Button name="buttonMovePlasmaToBags" label="Move plasma to bags" h_alignment="LEFT" layout_borders="Rect(5,5,5,5)"  />
       </View>
     </BorderView>
 

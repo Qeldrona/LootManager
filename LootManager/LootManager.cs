@@ -320,6 +320,11 @@ namespace LootManager
                     if (moveItemToBagbut.Clicked == null)
                         moveItemToBagbut.Clicked += moveItemButtonClicked;
                 }
+                if (SettingsController.settingsWindow.FindView("buttonMovePlasmaToBags", out Button movePlasmaToBagsbut))
+                {
+                    if (movePlasmaToBagsbut.Clicked == null)
+                        movePlasmaToBagsbut.Clicked += movePlasmaToBagsButtonClicked;
+                }
             }
         }
 
@@ -433,6 +438,10 @@ namespace LootManager
             }
 
             return;
+        }
+        private async void movePlasmaToBagsButtonClicked(object sender, ButtonBase e)
+        {
+            await MoveBloodPlasmaToContainers();
         }
         private void moveMonsterPartsToInventoryButtonClicked(object sender, ButtonBase e)
         {
@@ -706,7 +715,7 @@ namespace LootManager
         }
         private async Task MoveItemToContainers()
         {
-            var ncuList = Inventory.Items.Where(c => c.Name.ToLower() == "yuttos modified ncu");
+            var ncuList = Inventory.Items.Where(c => c.Name.ToLower() == "fragment of the source");
             foreach (var ncu in ncuList)
             {
                 var availableLootBag = await FindOpenBagWithSpace();
